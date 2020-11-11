@@ -126,7 +126,9 @@ io.on('connection', client=>{
     });
     
 })
-server.listen(PORT, HOST);
+server.listen(PORT, HOST, function () {
+    console.log('Server listening at port %d', PORT);
+});
 function uuidv4() {  
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {  
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);  
