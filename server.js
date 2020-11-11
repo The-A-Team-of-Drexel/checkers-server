@@ -1,4 +1,5 @@
-const server = require('http').createServer();
+var app = require('express')();
+const server = require('http').createServer(app);
 const io = require('socket.io')(server, 
     (
         {
@@ -13,6 +14,10 @@ var sockets={}
 var games={}
 
 console.log(PORT);
+
+app.get('/', function(req, res){
+    res.sendfile('index.html');
+  });
 
 io.on('connection', client=>{
     // io.set('match origin protocol', true);
