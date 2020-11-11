@@ -1,5 +1,11 @@
-const server = require('http').createServer()
-const io = require('socket.io')(server);
+const server = require('http').createServer();
+const io = require('socket.io')(server, 
+    (
+        {
+            'transports': ['websocket'],
+            'match origin protocol': true
+        })
+    );
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "127.0.0.1";
 var players={}
@@ -7,6 +13,7 @@ var sockets={}
 var games={}
 
 io.on('connection', client=>{
+    // io.set('match origin protocol', true);
     client.emit('connected',{'id':client.id});
     console.log('Hello friend')
     
