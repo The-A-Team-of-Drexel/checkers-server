@@ -12,6 +12,8 @@ var players={}
 var sockets={}
 var games={}
 
+console.log(PORT);
+
 io.on('connection', client=>{
     // io.set('match origin protocol', true);
     client.emit('connected',{'id':client.id});
