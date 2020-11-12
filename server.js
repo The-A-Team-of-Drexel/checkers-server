@@ -7,8 +7,8 @@ const io = require('socket.io')(server,
             'match origin protocol': true
         })
     );
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "127.0.0.1";
+const PORT = process.env.port || 3000;
+const HOST = process.env.host || "127.0.0.1";
 var players={}
 var sockets={}
 var games={}
