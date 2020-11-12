@@ -126,7 +126,7 @@ io.on('connection', client=>{
     });
     
 })
-server.listen(PORT, HOST, function () {
+server.listen(PORT, function () {
     console.log('Server listening at port %d', PORT);
 });
 function uuidv4() {  
