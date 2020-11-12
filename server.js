@@ -1,8 +1,8 @@
 var app = require('express')();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server, ({'transports': ['websocket']}));
+const io = require('socket.io')(server, {'transports': ['websocket']});
 
-var PORT = process.env.PORT || process.env.port || 3000;
+var PORT = process.env.PORT || 3000;
 
 var players={}
 var sockets={}
