@@ -11,7 +11,7 @@ var games={}
 console.log(PORT);
 
 app.get('/', function(req, res){
-    res.sendFile('index.html');
+    res.sendFile('./index.html');
   });
 
 io.on('connection', client=>{
