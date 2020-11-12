@@ -2,12 +2,23 @@
 <html lang="en">
 
 <head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var el;
+    
+        socket.on('time', function(timeString) {
+            el = document.getElementById('server-time')
+            el.innerHTML = 'Server time: ' + timeString;
+        });
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>React App</title>
 </head>
 
-<body><noscript>You need to enable JavaScript to run this app.</noscript>
+<body>
+    <p id="server-time"></p>
 </body>
 
 </html>

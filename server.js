@@ -1,6 +1,9 @@
-var app = require('express')();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server, {'transports': ['websocket']});
+// var server = require('express')();
+// const server = require('http').createServer(app);
+// const io = require('socket.io')(server, {'transports': ['websocket']});
+
+const express = require('express');
+const socketIO = require('socket.io');
 
 const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html'
@@ -10,9 +13,15 @@ var sockets={}
 var games={}
 
 console.log(PORT);
-app
+// app
+//     .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+//     .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const server = express()
     .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const io = socketIO(server);
 
 io.on('connection', client=>{
     // io.set('match origin protocol', true);
@@ -122,6 +131,7 @@ io.on('connection', client=>{
     
 })
 
+setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
 function uuidv4() {  
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {  
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);  
