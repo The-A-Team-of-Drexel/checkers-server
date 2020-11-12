@@ -2,22 +2,22 @@ var app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {'transports': ['websocket']});
 
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html'
 
 var players={}
 var sockets={}
 var games={}
 
 console.log(PORT);
-
-// app.get('/', function(req, res){
-//     res.sendFile('./index.html');
-//   });
+app
+    .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 io.on('connection', client=>{
     // io.set('match origin protocol', true);
     client.emit('connected',{'id':client.id});
-    console.log('Hello friend')
+    console.log(`Hello friend ${client.id}`);
     
     client.on('checkUserDetail',data=>{
         var flag=false;
@@ -121,9 +121,7 @@ io.on('connection', client=>{
     });
     
 })
-server.listen(PORT, function () {
-    console.log('Server listening at port %d', PORT);
-});
+
 function uuidv4() {  
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {  
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);  
