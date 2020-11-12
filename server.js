@@ -1,6 +1,6 @@
 var app = require('express')();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server, ({'transports': ['websocket'], 'match origin protocol': true}));
+const io = require('socket.io')(server, ({'transports': ['websocket']}));
 
 var PORT = process.env.PORT || process.env.port || 3000;
 
