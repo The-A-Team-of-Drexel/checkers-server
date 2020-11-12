@@ -3,7 +3,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server, 
     (
         {
-            'transports': ['websocket'],
+            transports: ['websocket'],
             'match origin protocol': true
         })
     );
