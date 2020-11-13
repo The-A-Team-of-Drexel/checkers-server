@@ -87,6 +87,9 @@ io.on('connection', client=>{
 
     
     client.on('selectOpponent', data => {  
+        // console.log("selectOpponent", data);
+        // console.log(io.sockets.sockets.get(client.id));
+        
         var response = { status: false, message: "Opponent is playing with someone else." };  
         if (!sockets[data.id].is_playing) {
             //generate random gameid  
@@ -121,8 +124,8 @@ io.on('connection', client=>{
                 won: players[sockets[data.id].mobile_number].won,  
                 draw: players[sockets[data.id].mobile_number].draw  
             };  
-            io.sockets.connected[client.id].join(gameId);  
-            io.sockets.connected[data.id].join(gameId);  
+            client.join(gameId);
+            io.sockets.sockets.get(data.id).join(gameId);  
             io.emit('excludePlayers', [client.id, data.id]);  
             io.to(gameId).emit('gameStarted', { status: true, game_id: gameId, game_data: games[gameId] });  
    
