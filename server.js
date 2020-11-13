@@ -23,12 +23,12 @@ const server = express()
 
 const io = socketIO(server, {'transports': ['websocket']});
 
-io.on('connection', client=>{
+io.on('connection', client =>{
     // io.set('match origin protocol', true);
     client.emit('connected',{'id':client.id});
     console.log(`Hello friend ${client.id}`);
     
-    client.on('checkUserDetail',data=>{
+    client.on('checkUserDetail', data=>{
         var flag=false;
         for(var id in sockets){
             if(sockets[id].mobile_number === data.mobileNumber){
@@ -91,7 +91,7 @@ io.on('connection', client=>{
         // console.log(io.sockets.sockets.get(client.id));
         
         var response = { status: false, message: "Opponent is playing with someone else." };  
-        if (!sockets[data.id].is_playing) {
+        if (sockets[data.id] && !sockets[data.id].is_playing) {
             //generate random gameid  
             var gameId = uuidv4();  
             sockets[data.id].is_playing = true;  
