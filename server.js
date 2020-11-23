@@ -130,7 +130,7 @@ io.on('connection', client =>{
 
     client.on('selectCell', data => {
 
-        console.log(data);
+        console.log("selectCell " + data.gameState);
         // games[data.gameId].playboard[data.i][data.j] = games[data.gameId][games[data.gameId].whose_turn].sign;
 
         // var isDraw = true;
@@ -151,7 +151,7 @@ io.on('connection', client =>{
         //     if (tempComb === "xxx" || tempComb === "ooo") {
         //         games[data.gameId].game_winner = games[data.gameId].whose_turn;
         //         games[data.gameId].game_status = "won";
-        //         games[data.gameId].winning_combination = [[winCombinations[i][0][0], winCombinations[i][0][1]], [winCombinations[i][1][0], winCombinations[i][1][1]], [winCombinations[i][2][0], winCombinations[i][2][1]]];
+        //         games[data.gameId].winning_combination = [[winCombinations[i][0][0],  winCombinations[i][0][1]], [winCombinations[i][1][0], winCombinations[i][1][1]], [winCombinations[i][2][0], winCombinations[i][2][1]]];
         //         players[games[data.gameId][games[data.gameId].game_winner].mobile_number].won++;
         //     }
         // }
@@ -159,7 +159,7 @@ io.on('connection', client =>{
         //     players[games[data.gameId][games[data.gameId].player1].mobile_number].draw++;
         //     players[games[data.gameId][games[data.gameId].player2].mobile_number].draw++;
         // }
-        // games[data.gameId].whose_turn = games[data.gameId].whose_turn == games[data.gameId].player1 ? games[data.gameId].player2 : games[data.gameId].player1;
+        games[data.gameId].whose_turn = games[data.gameId].whose_turn == games[data.gameId].player1 ? games[data.gameId].player2 : games[data.gameId].player1;
         io.to(data.gameId).emit('selectCellResponse', {gameData: games[data.gameId], gameState: data.gameState, playerId: data.playerId});
 
         // if (games[data.gameId].game_status == "draw" || games[data.gameId].game_status == "won") {
